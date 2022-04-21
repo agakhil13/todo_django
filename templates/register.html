@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To do list - Register</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 3px solid #f1f1f1;}
+
+#main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 5% 25%;
+
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background: #07C3E8;
+  color: white;
+  text-align: center;
+  transition: 0.3s;
+  font-weight: bold;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 48%;
+}
+
+button:hover {
+  background-color: #05A1C2;
+}
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+  
+<div id="main">
+
+<form action="register" method="post">
+    <h2>Registration Form</h2>
+    {% for message in messages %}
+      <h4 style="color:#05A1C2;"> [ {{message}} ] </h4>
+    {% endfor %}
+    <div class="container">
+    {% csrf_token %}
+    <label for="first_name"><b>First Name</b></label>
+    <input type="text" placeholder="Enter First Name" name="first_name" required>
+
+    <label for="last_name"><b>Last Name</b></label>
+    <input type="text" placeholder="Enter Last Name" name="last_name" required>
+
+    <label for="username"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="username" required>
+
+    <label for="password1"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password1" required>
+
+    <label for="password2"><b>Confirm Password</b></label>
+    <input type="password" placeholder="Re-enter Password" name="password2" required>
+
+
+    <center>
+      <button type="submit">Register</button>
+      <button onclick="window.location.href='login';">Login</button>
+   </center>
+   </div>
+</form>
+</div>
+</body>
+</html>

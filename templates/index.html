@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Django To Do List App</title>
+  <title>To do list - Home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {
@@ -107,6 +107,23 @@ input {
   font-size: 16px;
 }
 
+#logout {
+  background: #07C3E8;
+  color: white;
+  text-align: center;
+  transition: 0.3s;
+  font-weight: bold;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  float: right;
+}
+
+#logout:hover {
+  background-color: #05A1C2;
+}
+
 /* Style the "Add" button */
 .addBtn {
   padding: 10px;
@@ -118,7 +135,7 @@ input {
   font-size: 16px;
   cursor: pointer;
   transition: 0.3s;
-  border-radius: 0;
+  border: none;
   font-weight: bold;
 }
 
@@ -130,6 +147,10 @@ input {
 <body>
 
 <div id="myDIV" class="header">
+  {% if user.is_authenticated %}
+  <button id="logout" onclick="window.location.href='logout';">Logout</button>
+  {% endif %}
+  <h3 style="margin:5px; float:left;">Welcome {{user.first_name | title}}</h3>
   <h2 style="margin:5px">Django To Do List App</h2>
   <form action="" method="POST">
     {% csrf_token %}
