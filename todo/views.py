@@ -60,7 +60,10 @@ def register(request):
         
         if password1 == password2:
             if len(password1) > 7:
-                if User.objects.filter(username=username).exists():
+                if len(username) < 6:
+                    messages.info(request, 'Minimun username len = 6')
+                    return redirect('register')
+                elif User.objects.filter(username=username).exists():
                     messages.info(request, 'Username already taken')
                     return redirect('register')
                 else:
