@@ -71,9 +71,6 @@ def logout(request):
     auth.logout(request)
     return redirect('login')
 
-def new(request):
-    todo = Todo.objects.all()
-    return render(request, 'index.html', {'todos': todo})
 
 def status(request, pk):
     todo = Todo.objects.get(id=pk)
