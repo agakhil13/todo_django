@@ -24,7 +24,7 @@
 	cursor:pointer;"
   onclick="window.location.href='logout';"> Logout </button>{% endif %}
   <h1>
-    {% if user.is_authenticated %} <span>Hello {{user.first_name}},</span> {% endif %} Todo List
+    {% if user.is_authenticated %} <span>Hello {{user.first_name | title}},</span> {% endif %} Todo List
     <span>Get things done, one item at a time.</span>
   </h1>
   {% if todos %}
