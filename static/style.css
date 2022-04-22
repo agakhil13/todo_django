@@ -146,7 +146,7 @@ form button {
 }
 .togglebutton-wrapper .togglebutton-label {
 	font-size:.8rem;
-	letter-spacing:.1em
+	letter-spacing:.1em;
 }
 .togglebutton-wrapper .tooglebutton-box {
 	position:relative;
