@@ -7,25 +7,34 @@ from django.contrib.auth.models import User, auth
 # Create your views here.
 
 def index(request):
-    if request.user.is_authenticated:
-        todo = Todo.objects.filter(user_name=request.user.username)
-        if request.method == 'POST':
-            new_todo = Todo(
-                title=request.POST['title'],
-                user_name=request.user.username
-                )
-            new_todo.save()
-            return redirect('/')
+    try:
+        if request.user.is_authenticated:
+            todo = Todo.objects.filter(user_name=request.user.username)
+            if request.method == 'POST':
+                new_todo = Todo(
+                    title=request.POST['title'],
+                    user_name=request.user.username
+                    )
+                new_todo.save()
+                return redirect('/')
 
-        else:    
-            return render(request,'index.html', {'todos': todo})
-    else:
-        return redirect('login')
+            else:    
+                return render(request,'index.html', {'todos': todo})
+        else:
+            return redirect('login')
+    except:
+        return redirect('logout')
 
 def delete(request, pk):
-    todo = Todo.objects.get(id=pk)
-    todo.delete()
-    return redirect('/')
+    try:
+        if request.user.is_authenticated:
+            todo = Todo.objects.get(id=pk, user_name=request.user.username)
+            todo.delete()
+            return redirect('/')
+        else:
+            return redirect('login')
+    except:
+        return redirect('logout')
 
 def login(request):
     if request.method == 'POST':
@@ -73,12 +82,24 @@ def logout(request):
 
 
 def status(request, pk):
-    todo = Todo.objects.get(id=pk)
-    todo.status = not todo.status
-    todo.save()
-    return redirect('/')
+    try:
+        if request.user.is_authenticated:
+            todo = Todo.objects.get(id=pk, user_name=request.user.username)
+            todo.status = not todo.status
+            todo.save()
+            return redirect('/')
+        else:
+            return redirect('login')
+    except:
+        return redirect('logout')
 
 def clearall(request):
-    todo = todo = Todo.objects.filter(user_name=request.user.username)
-    todo.delete()
-    return redirect('/')
+    try:
+        if request.user.is_authenticated:
+            todo = todo = Todo.objects.filter(user_name=request.user.username)
+            todo.delete()
+            return redirect('/')
+        else:
+            return redirect('login')
+    except:
+        return redirect('logout')
