@@ -70,3 +70,18 @@ def register(request):
 def logout(request):
     auth.logout(request)
     return redirect('login')
+
+def new(request):
+    todo = Todo.objects.all()
+    return render(request, 'index.html', {'todos': todo})
+
+def status(request, pk):
+    todo = Todo.objects.get(id=pk)
+    todo.status = not todo.status
+    todo.save()
+    return redirect('/')
+
+def clearall(request):
+    todo = todo = Todo.objects.filter(user_name=request.user.username)
+    todo.delete()
+    return redirect('/')
