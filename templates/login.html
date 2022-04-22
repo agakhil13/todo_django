@@ -1,88 +1,39 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-    <title>To do list - Login</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
+  <meta charset="UTF-8">
+  <title>To do list - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"><link rel="stylesheet" href="{% static './style.css' %}">
 
-#main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10%;
-}
-
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
-
-button {
-    background: #FF6666;
-    color: white;
-    text-align: center;
-    transition: 0.3s;
-    font-weight: bold;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 48%;
-  }
-  
-  button:hover {
-    background-color: #FF5E5E;
-  }
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
 </head>
 <body>
-<div id="main">
+<!-- partial:index.partial.html -->
+<main id="todolist">
 
-<form action="login" method="post">
-    <h2>Login Form</h2>
-    {% for message in messages %}
-        <h4 style="color:#05A1C2;"> [ {{message}} ] </h4>
-    {% endfor %}
-    <div class="container">
+  <h1>
+    User Login
+    <span>Get things done, one item at a time.</span>
+  </h1>
+  {% for message in messages %}
+  <br>
+    <h4 style="color:white;"> [ {{message}} ] </h4>
+  {% endfor %}
+  <form action="login" method="POST">
     {% csrf_token %}
-    <label for="username"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
+    <label for="title">Username</label>
+    <input type="text" name="username" placeholder="Username" required>
+    <label for="password">Password</label>
+    <input type="tepasswordxt" name="password" placeholder="Password" required>
+    <button type="submit" >Login</button>
+    <span>New User? <a href='register' style='color:white;'>Register here!</a></span>
+    </form>
+    
+</main>
 
-    <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
-    <center>
-      <button type="submit">Login</button>
-      <button onclick="window.location.href='register';">Register</button>
-   </center>
-   </div>
-</form>
-</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js'></script><script  src="{% static './script.js' %}"></script>
 </body>
 </html>
